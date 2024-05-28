@@ -10,13 +10,13 @@ export const login = async (req: express.Request, res: express.Response) =>{
         if(!email ||!password){
             return res.sendStatus(400);
         }
-        const user=await getUserByEmail(email).Select('+authentication.salt +authentication.password')
+        const user=await getUserByEmail(email).select('+authentication.salt +authentication.password')
 
         if(!user){
             return res.sendStatus(400)
         }
         const expectedHash=authentication(user.authentication.salt,password)
-        if (user.authentication.passwor!=expectedHash){
+        if (user.authentication.password!=expectedHash){
             return res.sendStatus(403);
         }
         const salt=random();
