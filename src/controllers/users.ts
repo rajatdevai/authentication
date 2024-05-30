@@ -1,6 +1,6 @@
 import express from 'express';
-import { getUserById, getUsers, deleteUserById } from 'db/users'; // Import functions from db/users
-import { identity } from 'lodash';
+import { getUserById, getUsers, deleteUserById } from '../db/users'; // Import functions from db/users
+
 
 // Fetch all users
 export const getAllUsers = async (req: express.Request, res: express.Response) => {
@@ -37,9 +37,9 @@ export const updateUser = async (req: express.Request, res: express.Response) =>
 
         const user = await getUserById(id);
 
-        if (!user) {
-            return res.sendStatus(404); // User not found
-        }
+        // if (!user) {
+        //     return res.sendStatus(404); // User not found
+        // }
 
         user.username = username;
         await user.save();
